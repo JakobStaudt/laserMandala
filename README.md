@@ -1,5 +1,6 @@
 # laserMandala
 Engraving Mandala Patterns with CNC Lasers
+![Mandala 1](https://i.imgur.com/9oIvgoR.jpg) ![Mandala 2](https://i.imgur.com/DcLne2w.jpg)
 ## What it is:
 This Program lets you generate G-Code for engraving Mandala Patterns with a CNC Laser.
 ## What you need:
