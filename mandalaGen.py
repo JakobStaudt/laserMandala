@@ -2,19 +2,30 @@ import turtle
 import random
 import math
 
+
+# Number of different shapes to generate, experiment and see what looks good
 shapeNumber = 4
+# How often the Patterns should be rotated
 symmetry = 12
+# The maximum height of the Patterns from the center, !!! RADIUS MIGHT BE BIGGER !!!, watch out.
 maxHeight = 30
-
+# shift of Origin in x-direction, relative to center of pattern
 xOffset = 0
+# shift of Origin in x-direction, relative to center of pattern
 yOffset = 0
-
-scale = 10
-
+# scale of the pattern drawn on the Canvas, doesnt influence G-Code
+canvasScale = 10
+# G-Code to enable Laser
 laserEnable = ";Enabling Laser\nM400\nG4 P500\nM106\nM400\n"
+# G-Code to disable Laser
 laserDisable = ";Disabling Laser\nM400\nM107\nM400\n"
+# Speed to use while Laser is disabled
+travelSpeed = 3000
+# Speed to use while Laser is enabled
+cutSpeed = 1200
 
-gCode = "G90\nG0 F3000\nG1 F1200\n"
+
+gCode = "G90\nG0 F" + str(travelSpeed) + "\nG1 F" + str(cutSpeed) + "\n"
 
 turtle.speed(0)
 
@@ -26,7 +37,7 @@ def randShape():
         shapeType = 2
     else:
         shapeType = 3
-        
+
     if shapeType == 1:
         print("pattern")
         points = [[0, 0]]
@@ -110,7 +121,7 @@ def randShape():
 def drawShape(shape):
     penPos = False
     global gCode
-    turtle.goto(shape[0][0] * scale, shape[0][1] * scale)
+    turtle.goto(shape[0][0] * canvasScale, shape[0][1] * canvasScale)
     turtle.pendown()
     penPos = True
     #gCode += "G0 X" + str(shape[0][0] + xOffset) + " Y" + str(shape[0][1] + yOffset) + " Z10\n"
@@ -126,7 +137,7 @@ def drawShape(shape):
         else:
             x = point[0]
             y = point[1]
-            turtle.goto(x * scale, y * scale)
+            turtle.goto(x * canvasScale, y * canvasScale)
             x += xOffset
             y += yOffset
             gCode += "G1 X" + str(format(x, '.4f')) + " Y" + str(format(y, '.4f')) + " Z0\n"
